@@ -1,0 +1,23 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: API-GATEWAY
+
+#route to api gateway
+  cloud:
+    gateway:
+      routes:
+        - id: CITIZEN-SERVICE #id
+          uri:
+            lb://CITIZEN-SERVICE #loadbalance url through eureka
+          predicates:
+            - Path=/citizen/**
+
+        - id: VACCINATION-CERTER-SERVICE
+          uri:
+            lb://VACCINATION-CERTER-SERVICE
+          predicates:
+            - Path=/vaccinationcenter/**
+
